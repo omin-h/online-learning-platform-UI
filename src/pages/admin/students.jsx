@@ -21,7 +21,7 @@ const Students = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/students?page=${page}&limit=10&search=${search}`);
+      const response = await fetch(`http://localhost:3000/students?page=${page}&limit=5&search=${search}`);
       const data = await response.json();
       setStudents(data.data || []);
       setLoading(false);
