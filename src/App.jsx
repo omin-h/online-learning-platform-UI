@@ -9,6 +9,7 @@ import Course  from './pages/admin/course';
 import Students from './pages/admin/students';
 import Instructors from './pages/admin/instructors';
 
+import CreateStudent from './pages/student/create-student';
 
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
         <Route path="course" element={<Course />} />
         <Route path="students" element={<Students />} />
         <Route path="instructors" element={<Instructors />} />
+
+        <Route path="create-student" element={<CreateStudent />} />
       </Route>
     </Routes>
   );

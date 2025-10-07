@@ -30,11 +30,16 @@ const Navbar = () => {
     },
     {
       title: 'Student',
-      subtopics: ['Enrolled Courses', 'Progress Tracking']
+      subtopics: [
+        { label: 'create student', path: '/create-student' },
+      ]
     },
     {
       title: 'Instructor',
-      subtopics: ['Course Creation', 'Student Assessment']
+      subtopics: [
+        { label: 'Course Creation', path: '/course-creation' },
+        { label: 'Student Assessment', path: '/student-assessment' }
+      ]
     }
   ];
 
