@@ -6,6 +6,8 @@ import CoursesByInstructor from './pages/all/courses-by-instructor';
 import FindCourseById from './pages/all/find-course';
 
 import Course  from './pages/admin/course';
+import Students from './pages/admin/students';
+import Instructors from './pages/admin/instructors';
 
 
 
@@ -19,6 +21,8 @@ function App() {
         <Route path="find-course" element={<FindCourseById />} />
 
         <Route path="course" element={<Course />} />
+        <Route path="students" element={<Students />} />
+        <Route path="instructors" element={<Instructors />} />
       </Route>
     </Routes>
   );
