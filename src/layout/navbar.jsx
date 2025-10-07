@@ -22,7 +22,7 @@ const Navbar = () => {
     {
       title: 'Admin',
       subtopics: [
-        { label: 'All instructors', path: '/all-instructors' },
+        { label: 'Courses', path: '/course' },
 
       ]
     },
