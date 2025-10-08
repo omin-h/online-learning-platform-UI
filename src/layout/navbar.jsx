@@ -31,14 +31,15 @@ const Navbar = () => {
     {
       title: 'Student',
       subtopics: [
-        { label: 'create student', path: '/create-student' },
+        { label: 'Create student', path: '/create-student' },
+        { label: 'Enroll Course', path: '/enroll-course' }
       ]
     },
     {
       title: 'Instructor',
       subtopics: [
-        { label: 'Course Creation', path: '/course-creation' },
-        { label: 'Student Assessment', path: '/student-assessment' }
+        { label: 'Create Instructor', path: '/create-instructor' },
+        { label: 'Enrolls', path: '/enrolls' }
       ]
     }
   ];

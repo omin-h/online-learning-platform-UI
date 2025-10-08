@@ -10,7 +10,10 @@ import Students from './pages/admin/students';
 import Instructors from './pages/admin/instructors';
 
 import CreateStudent from './pages/student/create-student';
+import EnrollCourse from './pages/student/enroll-course';
 
+import CreateInstructor from './pages/instructor/create-instructor';
+import Enroll from './pages/instructor/enrolls';
 
 function App() {
   return (
@@ -26,6 +29,11 @@ function App() {
         <Route path="instructors" element={<Instructors />} />
 
         <Route path="create-student" element={<CreateStudent />} />
+        <Route path="enroll-course" element={<EnrollCourse />} />
+
+        <Route path="create-instructor" element={<CreateInstructor />} />
+        <Route path="enrolls" element={<Enroll />} />
+
       </Route>
     </Routes>
   );
