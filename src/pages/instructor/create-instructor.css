@@ -1,10 +1,10 @@
-.create-student-container {
+.create-instructor-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.create-student-header {
+.create-instructor-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,15 +14,15 @@
   padding: 20px;
 }
 
-.create-student-header h2 {
+.create-instructor-header h2 {
   color: #ffffff;
   margin: 0;
 }
 
-.student-form-container {
+.instructor-form-container {
    background: white;
   padding-left: 24px;
-  padding-right: 50px;
+  padding-right: 47px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 12px;
@@ -111,7 +111,7 @@
     grid-template-columns: 1fr;
   }
   
-  .student-form-container {
+  .instructor-form-container {
     padding: 20px;
   }
 }
