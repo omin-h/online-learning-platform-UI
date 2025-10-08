@@ -25,6 +25,7 @@ const Navbar = () => {
         { label: 'Courses', path: '/course' },
         { label: 'Students', path: '/students' },
         { label: 'Instructors', path: '/instructors' },
+        { label: 'Enrolls', path: '/enrolls' }
 
       ]
     },
@@ -39,7 +40,6 @@ const Navbar = () => {
       title: 'Instructor',
       subtopics: [
         { label: 'Create Instructor', path: '/create-instructor' },
-        { label: 'Enrolls', path: '/enrolls' }
       ]
     }
   ];

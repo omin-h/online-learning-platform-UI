@@ -1,0 +1,155 @@
+.enrolls-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.enrolls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  padding: 20px;
+}
+
+.enrolls-header h2 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.loading, .no-enrollments {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+
+.enrolls-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.enrolls-table thead {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white;
+}
+
+.enrolls-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.enrolls-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 14px;
+}
+
+.enrolls-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.enrolls-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.approved {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.approve-btn,
+.reject-btn,
+.unenroll-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.approve-btn {
+  background: #10b981;
+  color: white;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.reject-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.reject-btn:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.unenroll-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.unenroll-btn:hover:not(:disabled) {
+  background: #4b5563;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled,
+.unenroll-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: scroll;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}
