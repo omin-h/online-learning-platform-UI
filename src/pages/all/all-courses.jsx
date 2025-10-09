@@ -3,52 +3,113 @@ import './all-courses.css';
 
 const AllCourses = () => {
     const [courses, setCourses] = useState([]);
+    const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
+    const [selectedInstructor, setSelectedInstructor] = useState('');
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
 
-    // Fetching courses from the backend
+
+
+    // Fetch instructors
     useEffect(() => {
-        const fetchCourses = async () => {
-            setLoading(true);
+        const fetchInstructors = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/courses?page=${page}&limit=6`);
+                const response = await fetch('http://localhost:3000/instructors/instructor-courses');
                 const data = await response.json();
-                if (page === 1) {
-                    setCourses(data.data || []);
-                } else {
-                    setCourses(prev => [...prev, ...(data.data || [])]);
-                }
-                // If less than limit, no more data
-                setHasMore((data.data || []).length === 6);
-                setLoading(false);
+                setInstructors(data || []);
             } catch (error) {
-                console.error('Error fetching courses:', error);
-                setLoading(false);
+                console.error('Error fetching instructors:', error);
             }
         };
 
-        fetchCourses();
+        fetchInstructors();
+    }, []);
+
+
+    // Fetch all courses
+    const fetchCourses = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:3000/courses?page=${page}&limit=6`);
+            const data = await response.json();
+            if (page === 1) {
+                setCourses(data.data || []);
+            } else {
+                 setCourses(prev => [...prev, ...(data.data || [])]);
+             }
+              setHasMore((data.data || []).length === 6);
+              setLoading(false);
+           } catch (error) {
+            console.error('Error fetching courses:', error);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+      fetchCourses();
     }, [page]);
+
+
+
+
+    // Handle instructor filter change
+    const handleInstructorChange = (e) => {
+        const instructorId = e.target.value;
+        setSelectedInstructor(instructorId);
+        setPage(1);
+        
+        if (instructorId === '') {
+            // Reset to all courses - refetch all courses
+            fetchCourses();
+        } else {
+            // Filter courses by selected instructor
+            const instructor = instructors.find(inst => inst.id === parseInt(instructorId));
+            if (instructor) {
+                setCourses(instructor.courseIds || []);
+                setHasMore(false);
+                setLoading(false);
+            }
+        }
+    };
+
+
 
     // search function
     const filteredCourses = courses.filter(course =>
+        course.id.toString().includes(search) ||
         course.title.toLowerCase().includes(search.toLowerCase()) ||
         course.description.toLowerCase().includes(search.toLowerCase())
     );
+
+
 
     return (
         <div className="all-courses-container">
             <div className="all-courses-header">
                 <h2>All Courses</h2>
-                <input
-                    type="text"
-                    className="course-search"
-                    placeholder="Search courses..."
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                />
+                <div className="filter-controls">
+                    <select 
+                        className="instructor-filter"
+                        value={selectedInstructor}
+                        onChange={handleInstructorChange}
+                    >
+                        <option value="">All Instructors</option>
+                        {instructors.map(instructor => (
+                            <option key={instructor.id} value={instructor.id}>
+                                {instructor.name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="text"
+                        className="course-search"
+                        placeholder="Search courses..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                </div>
             </div>
             <div className="courses-grid">
                 {filteredCourses.map((course) => (
@@ -69,7 +130,10 @@ const AllCourses = () => {
                     </div>
                 ))}
             </div>
-            {hasMore && !loading && (
+            {filteredCourses.length === 0 && !loading && (
+                <div className="no-courses">No courses found.</div>
+            )}
+            {hasMore && !loading && !selectedInstructor && (
                 <div style={{ textAlign: 'center', marginTop: 24 }}>
                     <button className="more-button" onClick={() => setPage(page + 1)}>
                         Load More

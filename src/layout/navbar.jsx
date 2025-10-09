@@ -15,8 +15,8 @@ const Navbar = () => {
       title: 'All',
       subtopics: [
         { label: 'All courses', path: '/all-courses' },
-        { label: 'Courses by instructor', path: '/courses-by-instructor' },
-        { label: 'Find a course', path: '/find-course' }
+        // { label: 'Courses by instructor', path: '/courses-by-instructor' },
+        // { label: 'Find a course', path: '/find-course' }
       ]
     },
     {
