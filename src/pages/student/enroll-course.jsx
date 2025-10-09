@@ -5,9 +5,27 @@ const EnrollCourse = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [enrolling, setEnrolling] = useState(null);
-  const [enrolledCourses, setEnrolledCourses] = useState(new Set());
+  const [enrollmentStatus, setEnrollmentStatus] = useState(new Map());
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
+  const studentId = 1; 
+
+  // Fetch student's enrollments to check status
+  const fetchStudentEnrollments = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/enroll/student/${studentId}`);
+      const data = await response.json();
+      
+      const statusMap = new Map();
+      data.forEach(enrollment => {
+        statusMap.set(enrollment.course.id, enrollment.status);
+      });
+      
+      setEnrollmentStatus(statusMap);
+    } catch (error) {
+      console.error('Error fetching student enrollments:', error);
+    }
+  };
 
   // Fetch all courses
   const fetchCourses = async () => {
@@ -25,6 +43,7 @@ const EnrollCourse = () => {
 
   useEffect(() => {
     fetchCourses();
+    fetchStudentEnrollments();
   }, [page]);
 
   // Handle enrollment
@@ -38,15 +57,15 @@ const EnrollCourse = () => {
         },
         body: JSON.stringify({
           courseId: courseId,
-          studentId: 1, // Fixed student ID
+          studentId: studentId,
           enrollmentDate: new Date().toISOString()
         }),
       });
       
       if (response.ok) {
         alert('Successfully enrolled in the course!');
-        // Add course to enrolled set
-        setEnrolledCourses(prev => new Set([...prev, courseId]));
+        // Add course to enrollment status map
+        setEnrollmentStatus(prev => new Map(prev).set(courseId, 'pending'));
       } else {
         const error = await response.json();
         alert(error.message || 'Failed to enroll in course');
@@ -59,8 +78,11 @@ const EnrollCourse = () => {
     }
   };
 
+  // Get enrollment status for a course
+  const getEnrollmentStatus = (courseId) => enrollmentStatus.get(courseId);
+
   // Check if course is enrolled
-  const isEnrolled = (courseId) => enrolledCourses.has(courseId);
+  const isEnrolled = (courseId) => enrollmentStatus.has(courseId);
 
   // Search function
   const filteredCourses = courses.filter(course =>
@@ -71,12 +93,20 @@ const EnrollCourse = () => {
   // Get button text and class
   const getButtonText = (courseId) => {
     if (enrolling === courseId) return 'Enrolling...';
-    if (isEnrolled(courseId)) return 'Pending';
+    
+    const status = getEnrollmentStatus(courseId);
+    if (status === 'pending') return 'Pending';
+    if (status === 'approved') return 'Approved';
+    if (status === 'rejected') return 'Rejected';
+    
     return 'Enroll Now';
   };
 
   const getButtonClass = (courseId) => {
-    if (isEnrolled(courseId)) return 'enroll-button pending';
+    const status = getEnrollmentStatus(courseId);
+    if (status === 'pending') return 'enroll-button pending';
+    if (status === 'approved') return 'enroll-button approved';
+    if (status === 'rejected') return 'enroll-button rejected';
     return 'enroll-button';
   };
 

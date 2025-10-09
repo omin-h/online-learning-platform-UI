@@ -1,21 +1,18 @@
 .enroll-course-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
 }
 
 .enroll-course-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  padding: 20px;
+  margin-bottom: 32px;
 }
 
 .enroll-course-header h2 {
-  color: #ffffff;
+  color: #1e3a8a;
   margin: 0;
 }
 
@@ -157,7 +154,6 @@
 }
 
 .enroll-button:disabled {
-  background: #cbd5e1;
   cursor: not-allowed;
 }
 
@@ -168,6 +164,24 @@
 
 .enroll-button.pending:hover {
   background: #f59e0b;
+}
+
+.enroll-button.approved {
+  background: #10b981;
+  cursor: not-allowed;
+}
+
+.enroll-button.approved:hover {
+  background: #10b981;
+}
+
+.enroll-button.rejected {
+  background: #ef4444;
+  cursor: not-allowed;
+}
+
+.enroll-button.rejected:hover {
+  background: #ef4444;
 }
 
 .pagination {
