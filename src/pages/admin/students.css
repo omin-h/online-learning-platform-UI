@@ -146,6 +146,10 @@
   font-size: 14px;
 }
 
+.student-table th:last-child { /* Actions column */
+  text-align: center;
+}
+
 .student-table td {
   padding: 16px;
   border-bottom: 1px solid #e5e7eb;

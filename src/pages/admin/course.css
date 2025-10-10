@@ -155,11 +155,41 @@
   font-size: 14px;
 }
 
+/* Add specific column widths */
+.course-table th:nth-child(1) { /* ID */
+  width: 5%;
+}
+
+.course-table th:nth-child(2) { /* Title */
+  width: 15%;
+}
+
+.course-table th:nth-child(3) { /* Description */
+  width: 35%;
+}
+
+.course-table th:nth-child(4) { /* Duration */
+  width: 10%;
+}
+
+.course-table th:nth-child(5) { /* Instructors */
+  width: 15%;
+}
+
+.course-table th:nth-child(6) { /* Actions */
+  width: 20%;
+  text-align: center;
+}
+
 .course-table td {
   padding: 16px;
   border-bottom: 1px solid #e5e7eb;
   color: #374151;
   font-size: 14px;
+}
+
+.course-table td:last-child { /* Actions column */
+  text-align: center;
 }
 
 .course-table tbody tr:hover {
@@ -173,6 +203,7 @@
 .action-buttons {
   display: flex;
   gap: 8px;
+  justify-content: center; /* Center the buttons */
 }
 
 .edit-btn,

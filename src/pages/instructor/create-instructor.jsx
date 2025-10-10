@@ -70,7 +70,7 @@ const CreateInstructor = () => {
   return (
     <div className="create-instructor-container">
       <div className="create-instructor-header">
-        <h2>Create New Instructor</h2>
+        <h2>Register As Instructor</h2>
       </div>
 
       <div className="instructor-form-container">

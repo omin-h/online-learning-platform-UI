@@ -52,6 +52,10 @@
   white-space: nowrap;
 }
 
+.enrolls-table th:last-child { /* Actions column */
+  text-align: center;
+}
+
 .enrolls-table td {
   padding: 16px;
   border-bottom: 1px solid #e5e7eb;

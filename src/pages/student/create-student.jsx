@@ -70,7 +70,7 @@ const CreateStudent = () => {
   return (
     <div className="create-student-container">
       <div className="create-student-header">
-        <h2>Register Student</h2>
+        <h2>Register As Student</h2>
       </div>
 
       <div className="student-form-container">

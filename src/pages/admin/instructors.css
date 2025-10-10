@@ -161,6 +161,10 @@
   border-bottom: none;
 }
 
+.instructor-table th:last-child { /* Actions column */
+  text-align: center;
+}
+
 .action-buttons {
   display: flex;
   gap: 8px;
