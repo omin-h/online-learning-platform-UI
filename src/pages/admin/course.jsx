@@ -173,6 +173,7 @@ const Course = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter course title"
+                 maxLength={30}
               />
             </div>
 
@@ -185,6 +186,7 @@ const Course = () => {
                 required
                 placeholder="Enter course description"
                 rows="4"
+                 maxLength={100}
               />
             </div>
 

@@ -20,24 +20,22 @@
 }
 
 .student-form-container {
-   background: white;
-  padding-left: 24px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  background: white;
+  padding: 32px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  /* margin-bottom: 10px; */
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .form-group label {
@@ -57,6 +55,7 @@
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
