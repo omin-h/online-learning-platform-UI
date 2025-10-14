@@ -17,6 +17,9 @@ const Students = () => {
     enrollmentDate: ''
   });
 
+
+  const token = localStorage.getItem('access_token');
+
   // Fetch all students
   const fetchStudents = async () => {
     setLoading(true);
@@ -78,6 +81,9 @@ const Students = () => {
       try {
         const response = await fetch(`http://localhost:3000/students/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         });
         
         if (response.ok) {

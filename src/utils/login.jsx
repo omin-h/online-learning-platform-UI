@@ -68,6 +68,10 @@ const Login = () => {
     }
   };
 
+  const handleCreateAccount = () => {
+    navigate('/create-student');
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -111,6 +115,14 @@ const Login = () => {
 
           <button type="submit" className="login-button" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+
+          <button 
+            type="button" 
+            className="create-account-button" 
+            onClick={handleCreateAccount}
+          >
+            Create Account
           </button>
         </form>
 

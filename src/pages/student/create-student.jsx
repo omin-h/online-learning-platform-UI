@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './create-student.css';
 
 const CreateStudent = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -42,15 +44,15 @@ const CreateStudent = () => {
       });
       
       if (response.ok) {
-        alert('Student created successfully!');
-        resetForm();
+        alert('Student account created successfully! Please login.');
+        navigate('/');
       } else {
-        alert('Failed to create student');
+        alert('Failed to create student account');
       }
       setLoading(false);
     } catch (error) {
       console.error('Error creating student:', error);
-      alert('Failed to create student');
+      alert('Failed to create student account');
       setLoading(false);
     }
   };
@@ -65,6 +67,10 @@ const CreateStudent = () => {
       password: '',
       enrollmentDate: ''
     });
+  };
+
+  const handleBackToLogin = () => {
+    navigate('/');
   };
 
   return (
@@ -152,10 +158,10 @@ const CreateStudent = () => {
 
           <div className="form-actions">
             <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? 'Creating...' : 'Create Student'}
+              {loading ? 'Creating...' : 'Create Account'}
             </button>
-            <button type="button" className="cancel-button" onClick={resetForm}>
-              Reset
+            <button type="button" className="cancel-button" onClick={handleBackToLogin}>
+              Back to Login
             </button>
           </div>
         </form>
