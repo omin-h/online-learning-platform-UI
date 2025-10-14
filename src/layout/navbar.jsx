@@ -19,7 +19,6 @@ const Navbar = () => {
     { label: 'Courses', path: '/dashboard/course' },
     { label: 'Students', path: '/dashboard/students' },
     { label: 'Instructors', path: '/dashboard/instructors' },
-    { label: 'Create Instructor', path: '/dashboard/create-instructor' },
     { label: 'Enrolls', path: '/dashboard/enrolls' }
   ];
 

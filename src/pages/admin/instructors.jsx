@@ -5,6 +5,7 @@ const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [currentInstructorId, setCurrentInstructorId] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
@@ -13,7 +14,8 @@ const Instructors = () => {
     name: '',
     email: '',
     expertise: '',
-    username: ''
+    username: '',
+    password: ''
   });
 
   const token = localStorage.getItem('access_token');
@@ -49,10 +51,46 @@ const Instructors = () => {
     });
   };
 
+  // Create new instructor
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    try {
+      const expertiseArray = formData.expertise.split(',').map(item => item.trim()).filter(item => item);
+      
+      const response = await fetch('http://localhost:3000/instructors', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          expertise: expertiseArray,
+          username: formData.username,
+          password: formData.password
+        }),
+      });
+      
+      if (response.ok) {
+        alert('Instructor created successfully!');
+        resetForm();
+        fetchInstructors();
+      } else {
+        alert('Failed to create instructor');
+      }
+    } catch (error) {
+      console.error('Error creating instructor:', error);
+      alert('Failed to create instructor');
+    }
+  };
+
   // Update instructor
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      const expertiseArray = formData.expertise.split(',').map(item => item.trim()).filter(item => item);
+      
       const response = await fetch(`http://localhost:3000/instructors/${currentInstructorId}`, {
         method: 'PUT',
         headers: {
@@ -62,7 +100,7 @@ const Instructors = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          expertise: formData.expertise,
+          expertise: expertiseArray,
           username: formData.username
         }),
       });
@@ -71,6 +109,8 @@ const Instructors = () => {
         alert('Instructor updated successfully!');
         resetForm();
         fetchInstructors();
+      } else {
+        alert('Failed to update instructor');
       }
     } catch (error) {
       console.error('Error updating instructor:', error);
@@ -92,6 +132,8 @@ const Instructors = () => {
         if (response.ok) {
           alert('Instructor deleted successfully!');
           fetchInstructors();
+        } else {
+          alert('Failed to delete instructor');
         }
       } catch (error) {
         console.error('Error deleting instructor:', error);
@@ -102,13 +144,15 @@ const Instructors = () => {
 
   // Edit button handler
   const handleEdit = (instructor) => {
+    setEditMode(true);
     setShowForm(true);
     setCurrentInstructorId(instructor.id);
     setFormData({
       name: instructor.name,
       email: instructor.email,
       expertise: Array.isArray(instructor.expertise) ? instructor.expertise.join(', ') : instructor.expertise,
-      username: instructor.username
+      username: instructor.username,
+      password: ''
     });
   };
 
@@ -118,9 +162,11 @@ const Instructors = () => {
       name: '',
       email: '',
       expertise: '',
-      username: ''
+      username: '',
+      password: ''
     });
     setShowForm(false);
+    setEditMode(false);
     setCurrentInstructorId(null);
   };
 
@@ -128,19 +174,21 @@ const Instructors = () => {
     <div className="instructors-container">
       <div className="instructors-header">
         <h2>Instructor Management</h2>
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search instructors..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <button 
+          className="add-button"
+          onClick={() => {
+            resetForm();
+            setShowForm(!showForm);
+          }}
+        >
+          {showForm ? 'Cancel' : '+ Add Instructor'}
+        </button>
       </div>
 
       {showForm && (
         <div className="instructor-form-container">
-          <h3>Edit Instructor</h3>
-          <form onSubmit={handleUpdate}>
+          <h3>{editMode ? 'Edit Instructor' : 'Create New Instructor'}</h3>
+          <form onSubmit={editMode ? handleUpdate : handleCreate}>
             <div className="form-group">
               <label>Name *</label>
               <input
@@ -149,7 +197,7 @@ const Instructors = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Enter name"
+                placeholder="Enter full name"
               />
             </div>
 
@@ -161,7 +209,7 @@ const Instructors = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="Enter email"
+                placeholder="Enter email address"
               />
             </div>
 
@@ -173,25 +221,41 @@ const Instructors = () => {
                 value={formData.expertise}
                 onChange={handleChange}
                 required
-                placeholder="Enter expertise (comma separated if multiple)"
+                placeholder="Enter expertise areas (comma separated, e.g., Networking, IME)"
               />
             </div>
 
-            <div className="form-group">
-              <label>Username *</label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                required
-                placeholder="Enter username"
-              />
+            <div className="form-row">
+              <div className="form-group">
+                <label>Username *</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter username"
+                />
+              </div>
+
+              {!editMode && (
+                <div className="form-group">
+                  <label>Password *</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter password"
+                  />
+                </div>
+              )}
             </div>
 
             <div className="form-actions">
               <button type="submit" className="submit-button">
-                Update Instructor
+                {editMode ? 'Update Instructor' : 'Create Instructor'}
               </button>
               <button type="button" className="cancel-button" onClick={resetForm}>
                 Cancel
@@ -262,7 +326,7 @@ const Instructors = () => {
             <span className="page-info">Page {page}</span>
             <button 
               onClick={() => setPage(page + 1)}
-              disabled={instructors.length < 3}
+              disabled={instructors.length < 5}
               className="page-button"
             >
               Next
