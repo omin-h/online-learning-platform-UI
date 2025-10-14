@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleLogout } from '../utils/logout';
 import './navbar.css';
 
 const Navbar = () => {
@@ -7,7 +8,6 @@ const Navbar = () => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    // Get user role from localStorage
     const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.role) {
       setUserRole(user.role);
@@ -32,6 +32,10 @@ const Navbar = () => {
     navigate(path);
   };
 
+  const onLogout = () => {
+    handleLogout(navigate);
+  };
+
   const menuItems = userRole === 'admin' ? adminMenuItems : studentMenuItems;
 
   return (
@@ -51,6 +55,10 @@ const Navbar = () => {
           </button>
         ))}
       </nav>
+
+      <button className="logout-button" onClick={onLogout}>
+        Logout
+      </button>
     </div>
   );
 };

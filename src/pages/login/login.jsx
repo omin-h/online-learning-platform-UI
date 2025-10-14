@@ -52,9 +52,9 @@ const Login = () => {
 
         // Redirect based on role
         if (data.user.role === 'admin') {
-          navigate('/dashboard');
+          navigate('/dashboard/all-courses');
         } else if (data.user.role === 'student') {
-          navigate('/dashboard');
+          navigate('/dashboard/all-courses');
         }
       } else {
         const errorData = await response.json();
