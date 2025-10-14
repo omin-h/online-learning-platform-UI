@@ -15,10 +15,12 @@ import EnrollCourse from './pages/student/enroll-course';
 
 import CreateInstructor from './pages/instructor/create-instructor';
 
+import Login from './pages/login/login';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<Login />} />
+      <Route path="dashboard" element={<MainLayout />}>
 
         <Route path="all-courses" element={<AllCourses />} />
         <Route path="courses-by-instructor" element={<CoursesByInstructor />} />

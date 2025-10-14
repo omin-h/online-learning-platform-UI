@@ -1,53 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = () => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState(null);
 
-  const toggleDropdown = (topic) => {
-    setActiveDropdown(activeDropdown === topic ? null : topic);
-  };
-
-  const menuItems = [
-    {
-      title: 'All',
-      subtopics: [
-        { label: 'All courses', path: '/all-courses' },
-        // { label: 'Courses by instructor', path: '/courses-by-instructor' },
-        // { label: 'Find a course', path: '/find-course' }
-      ]
-    },
-    {
-      title: 'Admin',
-      subtopics: [
-        { label: 'Courses', path: '/course' },
-        { label: 'Students', path: '/students' },
-        { label: 'Instructors', path: '/instructors' },
-        { label: 'Enrolls', path: '/enrolls' }
-
-      ]
-    },
-    {
-      title: 'Student',
-      subtopics: [
-        { label: 'Create student', path: '/create-student' },
-        { label: 'Enroll Course', path: '/enroll-course' }
-      ]
-    },
-    {
-      title: 'Instructor',
-      subtopics: [
-        { label: 'Create Instructor', path: '/create-instructor' },
-      ]
+  useEffect(() => {
+    // Get user role from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.role) {
+      setUserRole(user.role);
     }
+  }, []);
+
+  const adminMenuItems = [
+    { label: 'All Courses', path: '/dashboard/all-courses' },
+    { label: 'Courses', path: '/dashboard/course' },
+    { label: 'Students', path: '/dashboard/students' },
+    { label: 'Instructors', path: '/dashboard/instructors' },
+    { label: 'Create Instructor', path: '/dashboard/create-instructor' },
+    { label: 'Enrolls', path: '/dashboard/enrolls' }
   ];
 
-  const handleSubtopicClick = (path) => {
+  const studentMenuItems = [
+    { label: 'All Courses', path: '/dashboard/all-courses' },
+    { label: 'Enroll Course', path: '/dashboard/enroll-course' }
+  ];
+
+  const handleNavClick = (path) => {
     navigate(path);
-    setActiveDropdown(null);
-  }
+  };
+
+  const menuItems = userRole === 'admin' ? adminMenuItems : studentMenuItems;
 
   return (
     <div className="sidebar">
@@ -57,45 +42,13 @@ const Navbar = () => {
       
       <nav className="nav-menu">
         {menuItems.map((item, index) => (
-          <div key={index} className="nav-item">
-            <button 
-              className="nav-button"
-              onClick={() => toggleDropdown(item.title)}
-            >
-              <span>{item.title}</span>
-              <span className={`arrow ${activeDropdown === item.title ? 'arrow-up' : 'arrow-down'}`}>
-                ▼
-              </span>
-            </button>
-            
-            {activeDropdown === item.title && (
-              <div className="dropdown">
-                {item.subtopics.map((subtopic, subIndex) => {
-                  if (typeof subtopic === 'object') {
-                    return (
-                      <button
-                        key={subIndex}
-                        className="dropdown-button"
-                        onClick={() => handleSubtopicClick(subtopic.path)}
-                      >
-                        {subtopic.label}
-                      </button>
-                    );
-                  } else {
-                    return (
-                      <button
-                        key={subIndex}
-                        className="dropdown-button"
-                        // No navigation for string subtopics
-                      >
-                        {subtopic}
-                      </button>
-                    );
-                  }
-                })}
-              </div>
-            )}
-          </div>
+          <button
+            key={index}
+            className="nav-button"
+            onClick={() => handleNavClick(item.path)}
+          >
+            {item.label}
+          </button>
         ))}
       </nav>
     </div>
