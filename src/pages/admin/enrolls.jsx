@@ -6,11 +6,19 @@ const Enrolls = () => {
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(null);
 
+  const token = localStorage.getItem('access_token');
+
   // Fetch all enrollments
   const fetchEnrollments = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/enroll');
+      const response = await fetch('http://localhost:3000/enroll',{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
       const data = await response.json();
       setEnrollments(data || []);
       setLoading(false);
@@ -30,6 +38,9 @@ const Enrolls = () => {
     try {
       const response = await fetch(`http://localhost:3000/enroll/${id}/approved`, {
         method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
       
       if (response.ok) {
@@ -52,6 +63,9 @@ const Enrolls = () => {
     try {
       const response = await fetch(`http://localhost:3000/enroll/${id}/rejected`, {
         method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
       
       if (response.ok) {
@@ -75,6 +89,9 @@ const Enrolls = () => {
       try {
         const response = await fetch(`http://localhost:3000/enroll/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         });
         
         if (response.ok) {

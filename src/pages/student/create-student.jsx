@@ -10,8 +10,7 @@ const CreateStudent = () => {
     lastName: '',
     email: '',
     userName: '',
-    password: '',
-    enrollmentDate: ''
+    password: ''
   });
 
   // Handle form input changes
@@ -39,7 +38,7 @@ const CreateStudent = () => {
           email: formData.email,
           userName: formData.userName,
           password: formData.password,
-          enrollmentDate: formData.enrollmentDate
+          enrollmentDate: new Date().toISOString() // Current date
         }),
       });
       
@@ -64,8 +63,7 @@ const CreateStudent = () => {
       lastName: '',
       email: '',
       userName: '',
-      password: '',
-      enrollmentDate: ''
+      password: ''
     });
   };
 
@@ -143,17 +141,6 @@ const CreateStudent = () => {
                 placeholder="Enter password"
               />
             </div>
-          </div>
-
-          <div className="form-group">
-            <label>Enrollment Date *</label>
-            <input
-              type="date"
-              name="enrollmentDate"
-              value={formData.enrollmentDate}
-              onChange={handleChange}
-              required
-            />
           </div>
 
           <div className="form-actions">

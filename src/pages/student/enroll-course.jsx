@@ -13,13 +13,20 @@ const EnrollCourse = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   return user ? user.id : null;
   };
+
+  const token = localStorage.getItem('access_token');
   
   const studentId = getStudentId();
 
   // Fetch student's enrollments to check status
   const fetchStudentEnrollments = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/enroll/student/${studentId}`);
+      const response = await fetch(`http://localhost:3000/enroll/student/${studentId}`,{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       
       const statusMap = new Map();
@@ -59,6 +66,7 @@ const EnrollCourse = () => {
       const response = await fetch('http://localhost:3000/enroll', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
