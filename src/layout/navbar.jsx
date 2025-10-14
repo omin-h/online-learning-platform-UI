@@ -24,7 +24,6 @@ const Navbar = () => {
   ];
 
   const studentMenuItems = [
-    { label: 'All Courses', path: '/dashboard/all-courses' },
     { label: 'Enroll Course', path: '/dashboard/enroll-course' }
   ];
 

@@ -54,7 +54,7 @@ const Login = () => {
         if (data.user.role === 'admin') {
           navigate('/dashboard/all-courses');
         } else if (data.user.role === 'student') {
-          navigate('/dashboard/all-courses');
+          navigate('/dashboard/enroll-course');
         }
       } else {
         const errorData = await response.json();

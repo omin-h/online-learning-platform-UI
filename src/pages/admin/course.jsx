@@ -16,6 +16,8 @@ const Course = () => {
     instructorIds: ''
   });
 
+  const token = localStorage.getItem('access_token');
+
   // Fetch all courses
   const fetchCourses = async () => {
     setLoading(true);
@@ -50,6 +52,7 @@ const Course = () => {
       const response = await fetch('http://localhost:3000/courses', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -79,6 +82,7 @@ const Course = () => {
       const response = await fetch(`http://localhost:3000/courses/${currentCourseId}`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -106,6 +110,9 @@ const Course = () => {
       try {
         const response = await fetch(`http://localhost:3000/courses/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         });
         
         if (response.ok) {

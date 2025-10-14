@@ -16,11 +16,18 @@ const Instructors = () => {
     username: ''
   });
 
+  const token = localStorage.getItem('access_token');
+
   // Fetch all instructors
   const fetchInstructors = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/instructors?page=${page}&limit=5&search=${search}`);
+      const response = await fetch(`http://localhost:3000/instructors?page=${page}&limit=5&search=${search}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       setInstructors(data.data || []);
       setLoading(false);
@@ -49,6 +56,7 @@ const Instructors = () => {
       const response = await fetch(`http://localhost:3000/instructors/${currentInstructorId}`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -76,6 +84,9 @@ const Instructors = () => {
       try {
         const response = await fetch(`http://localhost:3000/instructors/${id}`, {
           method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
         });
         
         if (response.ok) {

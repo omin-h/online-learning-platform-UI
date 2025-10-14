@@ -24,7 +24,12 @@ const Students = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/students?page=${page}&limit=5&search=${search}`);
+      const response = await fetch(`http://localhost:3000/students?page=${page}&limit=5&search=${search}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      });
       const data = await response.json();
       setStudents(data.data || []);
       setLoading(false);
@@ -53,6 +58,7 @@ const Students = () => {
       const response = await fetch(`http://localhost:3000/students/${currentStudentId}`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -122,12 +128,6 @@ const Students = () => {
     setShowForm(false);
     setCurrentStudentId(null);
   };
-
-//   // Format date to display only the date part
-//   const formatDate = (dateString) => {
-//     if (!dateString) return 'N/A';
-//     return new Date(dateString).toLocaleDateString();
-//   };
 
   return (
     <div className="students-container">

@@ -8,7 +8,13 @@ const EnrollCourse = () => {
   const [enrollmentStatus, setEnrollmentStatus] = useState(new Map());
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const studentId = 1; 
+  
+  const getStudentId = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user ? user.id : null;
+  };
+  
+  const studentId = getStudentId();
 
   // Fetch student's enrollments to check status
   const fetchStudentEnrollments = async () => {
