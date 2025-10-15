@@ -285,7 +285,8 @@ const Instructors = () => {
               </thead>
               <tbody>
                 {instructors.map((instructor) => (
-                  <tr key={instructor.id}>
+                  <tr key={instructor.id}
+                  className={instructor.deletedAt ? 'deleted-row' : ''}>
                     <td>{instructor.id}</td>
                     <td>{instructor.name}</td>
                     <td>{instructor.email}</td>
@@ -295,7 +296,7 @@ const Instructors = () => {
                         : instructor.expertise}
                     </td>
                     <td>{instructor.username}</td>
-                    <td>{instructor.deletedAt ? new Date(instructor.deletedAt).toLocaleString() : 'N/A'}</td>
+                    <td>{instructor.deletedAt ? new Date(instructor.deletedAt).toLocaleString() : ''}</td>
                     <td>
                       <div className="action-buttons">
                         {!instructor.deletedAt && (

@@ -169,6 +169,11 @@
   text-align: center;
 }
 
+.deleted-row,
+.deleted-row td {
+  color: #c5c8ce !important; /* gray-400 */
+}
+
 .action-buttons {
   display: flex;
   gap: 8px;
