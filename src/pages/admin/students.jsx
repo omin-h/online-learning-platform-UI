@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './students.css';
+import server_url from '../../config/config.js';
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -24,7 +25,7 @@ const Students = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/students?page=${page}&limit=5&search=${search}`, {
+      const response = await fetch(`${server_url}/students?page=${page}&limit=5&search=${search}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -55,7 +56,7 @@ const Students = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/students/${currentStudentId}`, {
+      const response = await fetch(`${server_url}/students/${currentStudentId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -85,7 +86,7 @@ const Students = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this student?')) {
       try {
-        const response = await fetch(`http://localhost:3000/students/${id}`, {
+        const response = await fetch(`${server_url}/students/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -276,9 +277,9 @@ const Students = () => {
             <span className="page-info">Page {page}</span>
             <button 
               onClick={() => setPage(page + 1)}
-              disabled={students.length < 10}
+              disabled={students.length < 5}
               className="page-button"
-            >
+            > 
               Next
             </button>
           </div>

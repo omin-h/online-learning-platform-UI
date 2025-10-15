@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './all-courses.css';
+import server_url from '../../config/config.js';
 
 const AllCourses = () => {
     const [courses, setCourses] = useState([]);
@@ -16,7 +17,7 @@ const AllCourses = () => {
     useEffect(() => {
         const fetchInstructors = async () => {
             try {
-                const response = await fetch('http://localhost:3000/instructors/instructor-courses');
+                const response = await fetch(`${server_url}/instructors/instructor-courses`);
                 const data = await response.json();
                 setInstructors(data || []);
             } catch (error) {
@@ -32,7 +33,7 @@ const AllCourses = () => {
     const fetchCourses = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/courses?page=${page}&limit=6`);
+            const response = await fetch(`${server_url}/courses?page=${page}&limit=6`);
             const data = await response.json();
             if (page === 1) {
                 setCourses(data.data || []);

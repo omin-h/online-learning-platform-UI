@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './create-student.css';
+import server_url from '../../config/config.js';
 
 const CreateStudent = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const CreateStudent = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://localhost:3000/students', {
+      const response = await fetch(`${server_url}/students`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

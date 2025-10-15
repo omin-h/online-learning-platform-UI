@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './instructors.css';
+import server_url from '../../config/config.js';
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -24,7 +25,7 @@ const Instructors = () => {
   const fetchInstructors = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/instructors?page=${page}&limit=5&search=${search}`, {
+      const response = await fetch(`${server_url}/instructors?page=${page}&limit=5&search=${search}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -57,7 +58,7 @@ const Instructors = () => {
     try {
       const expertiseArray = formData.expertise.split(',').map(item => item.trim()).filter(item => item);
       
-      const response = await fetch('http://localhost:3000/instructors', {
+      const response = await fetch(`${server_url}/instructors`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -91,7 +92,7 @@ const Instructors = () => {
     try {
       const expertiseArray = formData.expertise.split(',').map(item => item.trim()).filter(item => item);
       
-      const response = await fetch(`http://localhost:3000/instructors/${currentInstructorId}`, {
+      const response = await fetch(`${server_url}/instructors/${currentInstructorId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -122,7 +123,7 @@ const Instructors = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this instructor?')) {
       try {
-        const response = await fetch(`http://localhost:3000/instructors/${id}`, {
+        const response = await fetch(`${server_url}/instructors/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,

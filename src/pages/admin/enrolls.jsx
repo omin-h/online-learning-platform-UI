@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './enrolls.css';
+import server_url from '../../config/config.js';
 
 const Enrolls = () => {
   const [enrollments, setEnrollments] = useState([]);
@@ -12,7 +13,7 @@ const Enrolls = () => {
   const fetchEnrollments = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/enroll',{
+      const response = await fetch(`${server_url}/enroll`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -36,7 +37,7 @@ const Enrolls = () => {
   const handleApprove = async (id) => {
     setProcessing(id);
     try {
-      const response = await fetch(`http://localhost:3000/enroll/${id}/approved`, {
+      const response = await fetch(`${server_url}/enroll/${id}/approved`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -61,7 +62,7 @@ const Enrolls = () => {
   const handleReject = async (id) => {
     setProcessing(id);
     try {
-      const response = await fetch(`http://localhost:3000/enroll/${id}/rejected`, {
+      const response = await fetch(`${server_url}/enroll/${id}/rejected`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -87,7 +88,7 @@ const Enrolls = () => {
     if (window.confirm('Are you sure you want to delete this enrollment?')) {
       setProcessing(id);
       try {
-        const response = await fetch(`http://localhost:3000/enroll/${id}`, {
+        const response = await fetch(`${server_url}/enroll/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import server_url from '../config/config.js';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,8 +30,8 @@ const Login = () => {
     try {
       // Determine endpoint based on username
       const endpoint = formData.username === 'admin' 
-        ? 'http://localhost:3000/auth/login/admin'
-        : 'http://localhost:3000/auth/login/student';
+        ? `${server_url}/auth/login/admin`
+        : `${server_url}/auth/login/student`;
 
       const response = await fetch(endpoint, {
         method: 'POST',

@@ -2,8 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from './layout/main-layout';
 
 import AllCourses from './pages/all/all-courses';
-import CoursesByInstructor from './pages/all/courses-by-instructor';
-import FindCourseById from './pages/all/find-course';
+
 
 import Course  from './pages/admin/course';
 import Students from './pages/admin/students';
@@ -13,7 +12,6 @@ import Enroll from './pages/admin/enrolls';
 import CreateStudent from './pages/student/create-student';
 import EnrollCourse from './pages/student/enroll-course';
 
-import CreateInstructor from './pages/instructor/create-instructor';
 
 import Login from './utils/login';
 function App() {
@@ -24,8 +22,7 @@ function App() {
       <Route path="dashboard" element={<MainLayout />}>
 
         <Route path="all-courses" element={<AllCourses />} />
-        <Route path="courses-by-instructor" element={<CoursesByInstructor />} />
-        <Route path="find-course" element={<FindCourseById />} />
+    
 
         <Route path="course" element={<Course />} />
         <Route path="students" element={<Students />} />
@@ -35,7 +32,7 @@ function App() {
         
         <Route path="enroll-course" element={<EnrollCourse />} />
 
-        <Route path="create-instructor" element={<CreateInstructor />} />
+   
 
 
       </Route>

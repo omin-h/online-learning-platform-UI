@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './enroll-course.css';
+import server_url from '../../config/config.js';
 
 const EnrollCourse = () => {
   const [courses, setCourses] = useState([]);
@@ -21,7 +22,7 @@ const EnrollCourse = () => {
   // Fetch student's enrollments to check status
   const fetchStudentEnrollments = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/enroll/student/${studentId}`,{
+      const response = await fetch(`${server_url}/enroll/student/${studentId}`,{
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -44,7 +45,7 @@ const EnrollCourse = () => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/courses?page=${page}&limit=6`);
+      const response = await fetch(`${server_url}/courses?page=${page}&limit=6`);
       const data = await response.json();
       setCourses(data.data || []);
       setLoading(false);
@@ -63,7 +64,7 @@ const EnrollCourse = () => {
   const handleEnroll = async (courseId) => {
     setEnrolling(courseId);
     try {
-      const response = await fetch('http://localhost:3000/enroll', {
+      const response = await fetch(`${server_url}/enroll`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
