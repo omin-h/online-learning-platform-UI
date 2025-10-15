@@ -279,6 +279,7 @@ const Instructors = () => {
                   <th>Email</th>
                   <th>Expertise</th>
                   <th>Username</th>
+                  <th>Deleted At</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -294,20 +295,25 @@ const Instructors = () => {
                         : instructor.expertise}
                     </td>
                     <td>{instructor.username}</td>
+                    <td>{instructor.deletedAt ? new Date(instructor.deletedAt).toLocaleString() : 'N/A'}</td>
                     <td>
                       <div className="action-buttons">
-                        <button 
-                          className="edit-btn"
-                          onClick={() => handleEdit(instructor)}
-                        >
-                          Edit
-                        </button>
-                        <button 
-                          className="delete-btn"
-                          onClick={() => handleDelete(instructor.id)}
-                        >
-                          Delete
-                        </button>
+                        {!instructor.deletedAt && (
+                          <>
+                            <button 
+                              className="edit-btn"
+                              onClick={() => handleEdit(instructor)}
+                            >
+                              Edit
+                            </button>
+                            <button 
+                              className="delete-btn"
+                              onClick={() => handleDelete(instructor.id)}
+                            >
+                              Delete
+                            </button>
+                          </>
+                        )}
                       </div>
                     </td>
                   </tr>
