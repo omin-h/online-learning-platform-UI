@@ -1,13 +1,13 @@
 .login-page-split {
   display: flex;
   /* min-height: 100vh; */
-  width: 100vw;
+  width: 99vw;
 }
 
 .login-image-half {
   flex: 1;
   background: url('../assets/11.jpg') center center/cover no-repeat;
-  min-height: 95vh;
+  min-height: 97vh;
    border-radius: 16px;
 }
 
