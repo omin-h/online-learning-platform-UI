@@ -1,20 +1,24 @@
-.enrolls-container {
+.enrolls-container2 {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0px;
 }
 
-.enrolls-header {
-  display: flex;
+.enrolls-header2 {
+ display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  padding: 20px;
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(59,130,246,0) 100%),
+    url('../../assets/dd.jpg') center/cover no-repeat;
+  padding-left: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
-.enrolls-header h2 {
+.enrolls-header2 h2 {
   color: #ffffff;
   margin: 0;
 }
@@ -40,8 +44,8 @@
 }
 
 .enrolls-table thead {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  color: white;
+  background:  #b4b4b4;
+  color: rgb(255, 255, 255);
 }
 
 .enrolls-table th {
@@ -97,15 +101,29 @@
 
 .action-buttons {
   display: flex;
-  gap: 8px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
 .approve-btn,
-.reject-btn,
-.unenroll-btn {
-  padding: 6px 12px;
+.reject-btn{
+  padding: 6px 5px;
   border: none;
+  width: 70px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.unenroll-btn {
+  padding-bottom: 6px;
+  padding-top: 6px;
+  border: none;
+  width: 145px;
+  justify-items: center;
   border-radius: 4px;
   font-size: 13px;
   font-weight: 500;

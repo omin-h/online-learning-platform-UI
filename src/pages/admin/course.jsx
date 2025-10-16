@@ -154,8 +154,8 @@ const Course = () => {
   };
 
   return (
-    <div className="course-container">
-      <div className="course-header">
+    <div className="course-container2">
+      <div className="course-header2">
         <h2>Course Management</h2>
         <button 
           className="add-button"

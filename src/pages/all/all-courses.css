@@ -5,14 +5,15 @@
 }
 
 .all-courses-header {
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 20px 24px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  margin-bottom: 24px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(59,130,246,0) 100%),
+    url('../../assets/ff.jpg') center/cover no-repeat;
+  padding: 20px;
 }
 
 .all-courses-header h2 {
@@ -77,14 +78,14 @@
   font-size: 16px;
 }
 
-.courses-grid {
+.courses3-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-bottom: 32px;
 }
 
-.course-card {
+.course3-card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -94,20 +95,21 @@
   flex-direction: column;
 }
 
-.course-card:hover {
+.course3-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-.course-header {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+.course3-header {
+  background: #f3f3ff7e;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
-  color: white;
+  padding-bottom: 20px;
+  color: rgb(50, 50, 50);
 }
 
-.course-title-row {
+.course3-title-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,12 +119,12 @@
   font-weight: 600;
 }
 
-.course-id-ball {
-  display: inline-flex;
+.course3-id-ball {
+ display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: rgba(192, 192, 192, 0.2);
+  color: rgb(106, 106, 106);
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -131,7 +133,7 @@
   flex-shrink: 0;
 }
 
-.course-body {
+.course3-body {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 0px;
@@ -139,14 +141,14 @@
   flex-grow: 1;
 }
 
-.course-description {
+.course3-description {
   color: #666;
   line-height: 1.6;
   margin-bottom: 16px;
   font-size: 14px;
 }
 
-.course-duration {
+.course3-duration {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -184,7 +186,7 @@
 }
 
 @media (max-width: 1200px) {
-  .courses-grid {
+  .courses3-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -210,7 +212,7 @@
     width: 100%;
   }
   
-  .courses-grid {
+  .courses3-grid {
     grid-template-columns: 1fr;
   }
 }

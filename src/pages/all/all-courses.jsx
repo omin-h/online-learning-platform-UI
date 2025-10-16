@@ -112,18 +112,18 @@ const AllCourses = () => {
                     />
                 </div>
             </div>
-            <div className="courses-grid">
+            <div className="courses3-grid">
                 {filteredCourses.map((course) => (
-                    <div key={course.id} className="course-card">
-                        <div className="course-header">
-                            <h3 className="course-title-row">
+                    <div key={course.id} className="course3-card">
+                        <div className="course3-header">
+                            <h3 className="course3-title-row">
                                 {course.title}
-                                <span className="course-id-ball">{course.id}</span>
+                                <span className="course3-id-ball">{course.id}</span>
                             </h3>
                         </div>
-                        <div className="course-body">
-                            <p className="course-description">{course.description}</p>
-                            <div className="course-duration">
+                        <div className="course3-body">
+                            <p className="course3-description">{course.description}</p>
+                            <div className="course3-duration">
                                 <span className="duration-label">Duration:</span>
                                 <span className="duration-value">{course.duration} hours</span>
                             </div>

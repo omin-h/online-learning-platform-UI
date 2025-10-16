@@ -1,8 +1,10 @@
 .login-container {
-  min-height: 100vh;
+  min-height: 97vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-card {

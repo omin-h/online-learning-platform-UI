@@ -131,8 +131,8 @@ const Enrolls = () => {
   };
 
   return (
-    <div className="enrolls-container">
-      <div className="enrolls-header">
+    <div className="enrolls-container2">
+      <div className="enrolls-header2">
         <h2>Enrollment Requests</h2>
       </div>
 
