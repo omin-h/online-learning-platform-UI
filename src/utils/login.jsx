@@ -74,61 +74,64 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <h1>Welcome Back</h1>
-          <p>Sign in to your account</p>
-        </div>
+    <div className="login-page-split">
+      <div className="login-image-half" />
+      <div className="login-container">
+        <div className="login-card">
+          <div className="login-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your account</p>
+          </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          {error && (
-            <div className="error-message">
-              {error}
+          <form onSubmit={handleSubmit} className="login-form">
+            {error && (
+              <div className="error-message">
+                {error}
+              </div>
+            )}
+
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                placeholder="Enter your username"
+                autoComplete="username"
+              />
             </div>
-          )}
 
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              placeholder="Enter your username"
-              autoComplete="username"
-            />
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
+
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+
+            <button 
+              type="button" 
+              className="create-account-button" 
+              onClick={handleCreateAccount}
+            >
+              Create Account
+            </button>
+          </form>
+
+          <div className="login-footer">
+            <p>Online Learning Platform</p>
           </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="Enter your password"
-              autoComplete="current-password"
-            />
-          </div>
-
-          <button type="submit" className="login-button" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-
-          <button 
-            type="button" 
-            className="create-account-button" 
-            onClick={handleCreateAccount}
-          >
-            Create Account
-          </button>
-        </form>
-
-        <div className="login-footer">
-          <p>Online Learning Platform</p>
         </div>
       </div>
     </div>
